@@ -1,0 +1,70 @@
+﻿a {
+    color: #333333;
+    background-color: #FFFFFF;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff0000;
+    background-color: #FFFFFF;
+    font-weight: normal;
+    text-decoration: none !important;
+}
+/* Show only to IE PC \*/
+
+.boxhead h2 {
+    height: 1%;
+}
+/* For IE 5 PC */
+
+.sidebox {
+    margin: 0 auto;
+    /* center for now */
+    width: 22em;
+    /* ems so it will grow */
+    background: url("../../Images/sbbody-r.gif") no-repeat bottom right;
+    font-size: 100%;
+}
+
+.boxhead {
+    background: url("../../Images/sbhead-r.gif") no-repeat top right;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+    .boxhead h2 {
+        background: url("../../Images/sbhead-l.gif") no-repeat top left;
+        margin: 0;
+        padding: 22px 30px 5px;
+        color: white;
+        font-weight: bold;
+        font-size: 1.2em;
+        line-height: 1em;
+        text-shadow: rgba(0, 0, 0, .4) 0px 2px 5px;
+        /* Safari-only, but cool */
+    }
+
+.boxbody {
+    background: url("../../Images/sbbody-l.gif") no-repeat bottom left;
+    margin: 0;
+    padding: 5px 30px 31px;
+}
+
+@-webkit-keyframes blinker {
+    from {
+        opacity: 1.0;
+    }
+
+    to {
+        opacity: 0.0;
+    }
+}
+
+.css3-blink {
+    -webkit-animation-name: blinker;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
+    -webkit-animation-duration: 1s;
+}

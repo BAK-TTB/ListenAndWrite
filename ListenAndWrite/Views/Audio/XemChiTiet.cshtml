@@ -1,0 +1,71 @@
+﻿@using ListenAndWrite.Models;
+@model Audio
+@{
+    ViewBag.Title = "Xem Chi Tiet";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<link href="~/Content/NguoiDungCssLayout/pageChiTiet.css" rel="stylesheet" />
+<div class="panel panel-default">
+    <div class="row-item row">
+        <div class="col-md-12" style="min-height: 700px;">
+            <div id="maincontent">
+                <div id="content">
+                    <br />
+                    <div style="float:left; width:110px;height:110px; border: 2px solid #DDDDDD;background:RGB(120,188,100);">
+                        <br />
+                        <center>
+                            <div style="color: #000000;background-color: RGB(120,188,100);font-weight:bold;font-size:2em;">
+                                Level
+                                <br />@Model.id
+                            </div>
+                        </center>
+                    </div>
+                    <br />
+                    <br />&nbsp;
+                    <font size=5>
+                        @Model.name
+                    </font>
+                    <p />
+                    <br>
+                    <br>
+                    <br>
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("ListenFullMore", new { @id=Model.id})">
+                                    <div class="sidebox">
+                                        <div class="boxhead">
+                                            <h2 style="color: #333333">1. Full Mode</h2>
+                                        </div>
+                                        <div class="boxbody">
+                                            <p>Type the whole letter of a word.</p>
+                                            <img src="~/Images/fullmode.gif" border="0" style="align:center;" alt="Full Mode" width="240" height="67">
+                                        </div>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("ListenNewMore", new { @id=Model.id})">
+                                    <div class="sidebox" style="margin-top: 20px;">
+                                        <div class="boxhead">
+                                            <h2 style="color: #005500;"><sup class="css3-blink"><i><font color="#bb0000">New</font></i></sup>2. Correction Mode <sup><i><font color="#bb0000">Beta</font></i></sup></h2>
+                                        </div>
+                                        <div class="boxbody">
+                                            <p>Type full sentence and correct it.</p>
+                                            <img src="~/Images/correctmode.gif" border="0" width="240">
+                                        </div>
+                                    </div>
+                                </a>
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- end contents -->
+            </div>
+            <!-- end main contents -->
+        </div>
+    </div>
+</div>
+
+

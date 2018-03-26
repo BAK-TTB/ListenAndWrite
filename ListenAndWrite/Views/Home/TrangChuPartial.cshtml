@@ -1,0 +1,40 @@
+﻿@using ListenAndWrite.Models;
+@*định nghĩa kiểu dữ liệu cho biến Model*@
+@model List<Audio>
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background-color:#337AB7; color:white; text-align: center; font-size: 20px;">
+        <p><b>Improve your listening skills and hear about the news.</b></p>
+        <p><b>Listen-and-write.com is free listening practice.</b></p>
+    </div>
+    <div class="row-item row">
+        <div class="col-md-12">
+            @{
+                /**/
+
+                foreach (var item in Model)
+                {
+                    <div class="item">
+                        <h4 class="title"><a href="@Url.Action("XemChiTiet", "Audio", new { @id=item.id})">♫ @item.name ♫</a></h4>
+                        <p>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-play-circle"></span> www.listen-and-write.com,
+                            <font color="#2E0CFA">level = @item.LevelAudio</font>, about one day ago
+                        </p>
+                    </div>
+                    <div class="break"></div>
+                }
+            }
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>

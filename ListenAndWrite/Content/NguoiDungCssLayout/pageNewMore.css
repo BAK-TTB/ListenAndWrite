@@ -1,0 +1,67 @@
+﻿div#answer {
+    display: block;
+    font-size: 20px;
+    color: blue;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 1.6em;
+    background: #FFFFFF;
+    margin: 0px 0px 10px 0px;
+    width: 500px;
+    height: 250px;
+    border: 7px solid #009900;
+    padding: 5px;
+}
+
+textarea#audioScriptTmode {
+    width: 500px;
+    height: 150px;
+    border: 7px solid #880000;
+    border-top: none;
+    padding: 5px;
+    font-family: Tahoma, sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    background: #ffffff;
+    background-image: url("../../Images/scriptbg4.png"); background-position: bottom right;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    /* for I.E. */
+}
+
+#pButton {
+    cursor: pointer;
+    height: 130px;
+    left: 50%;
+    margin: -50px 0px 0px -60px;
+    position: relative;
+    top: -95px;
+    width: 130px;
+    opacity: 0.6;
+    background: url("../../Images/youtube-play.png") no-repeat 50% 50%;
+}
+
+.play {
+    background: url("../../Images/youtube-play.png");
+}
+
+.pause {
+    background: url("../../Images/youtube-play.png");
+}
+
+#timeline {
+    width: 500px;
+    height: 8px;
+    margin-top: 20px;
+    float: left;
+    border-radius: 0px;
+    background: #880000;
+}
+
+#playhead {
+    width: 50px;
+    height: 6px;
+    border-radius: 0;
+    margin-top: 1px;
+    background: #45FFE3;
+}

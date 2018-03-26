@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QuanLyAudioModelStoreContainer" CdmEntityContainer="QuanLyAudioEntities">
+    <EntitySetMapping Name="Audios">
+      <EntityTypeMapping TypeName="QuanLyAudioModel.Audio">
+        <MappingFragment StoreEntitySet="Audio">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NameAudio" ColumnName="NameAudio" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="LevelAudio" ColumnName="LevelAudio" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

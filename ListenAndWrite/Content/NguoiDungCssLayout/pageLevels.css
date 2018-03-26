@@ -1,0 +1,18 @@
+﻿.levels {
+    display: inline-block;
+}
+
+.levels a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    font-size: 22px;
+    margin: 2px 2px;
+}
+
+.levels a:hover:not(.active) {
+    background-color: #ddd;
+}

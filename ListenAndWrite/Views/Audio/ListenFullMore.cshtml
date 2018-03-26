@@ -1,0 +1,176 @@
+﻿@using ListenAndWrite.Models;
+@model Audio
+@{
+    ViewBag.Title = "Listen Full More";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<link href="~/Content/NguoiDungCssLayout/pageFullMore.css" rel="stylesheet" />
+<div class="panel panel-default">
+    <div class="row-item row">
+        <div class="col-md-12" style="min-height: 700px;">
+            <div id="maincontent">
+                <div id="content">
+                    <br />
+                    <div style="float:left; width:110px;height:110px; border: 6px solid #DDDDDD; background:RGB(120,188,100);">
+                        <br />
+                        <center><a href="#" style="color: #000000;background-color: RGB(120,188,100);font-weight:bold;font-size:1.6em;">Level<br />@Model.id</a></center>
+                    </div>
+                    <h1 style="margin-left:65px;">
+                        &nbsp; @Model.name
+                    </h1>
+                    <br />
+                    <br />
+                    <br />
+                    <div id="player2" style="border:2px solid #dddddd; padding-bottom:10px;" align="center">
+                        <br>
+                        <br>
+                        <div id="sentence_list">
+                            <div align="center">
+                                <input type=button value="&laquo;" class="btn2" />
+                                <select id="sentences_no" class="select-style">
+                                    <option value="0">1...</option>
+                                    <option value="1">2...</option>
+                                    <option value="2">3...</option>
+                                </select>
+                                <input type=button value="&raquo;" class="btn2" />
+                            </div>
+                            <br>
+                            <div>
+                                <table border="0">
+                                    <tr>
+                                        <td width="20" align=right></td>
+                                        <td>
+                                            <audio id="music" preload="true" loop>
+                                                <source src="http://www.listen-and-write.com/myaudio/b54be944f47a4dd26000603aaf49ecc8/1B_Grammar_Bank_Discourse_markers_Reason.mp3" type="audio/mpeg">
+                                            </audio>
+                                            <div style="overflow: hidden;position: relative;height:250px;">
+                                                <div id="timeline">
+                                                    <div id="playhead"></div>
+                                                </div>
+                                                <div id="slimprogress" style="width:525px; height:3px;"></div>
+                                                <div id="litsen" style="color: #f00; font-size: 20px;"></div>
+                                                <span class='button small icon'><button type='button' id="stop">Stop</button></span>
+                                                <span class='button small icon'><span class='check'></span><button id="hint" type='button'>Hint</button></span>
+                                                <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
+                                                <div id="audioplayer">
+                                                    <div id="pButton" class="play"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <input id="text" type="text" name="text" value="i have a apple" style="border: none;">
+                                            <br>
+                                            <textarea cols="38" rows="1" id="answer" onkeyup="check(1, 1)" style=""></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <p>
+                        <center>
+                            <br />
+                            <h4>
+                                Please login to save your score and to see your history. >>
+                                <a href="dangnhap.html">Login</a>
+                            </h4>
+                            <image src="~/Images/sample_scores2.png" alt="sample scores">
+                        </center>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var music = document.getElementById('music'); 
+    var duration = music.duration;
+    var pButton = document.getElementById('pButton'); 
+    var playhead = document.getElementById('playhead'); 
+    var timeline = document.getElementById('timeline');
+    var stop = document.getElementById('stop');
+
+    var timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+
+    pButton.addEventListener("click", play);
+    stop.addEventListener("click", pause);
+
+    music.addEventListener("timeupdate", timeUpdate, false);
+
+    timeline.addEventListener("click", function (event) {
+        moveplayhead(event);
+        music.currentTime = duration * clickPercent(event);
+    }, false);
+
+    function clickPercent(event) {
+        return (event.clientX - getPosition(timeline)) / timelineWidth;
+    }
+
+    function timeUpdate() {
+        var playPercent = timelineWidth * (music.currentTime / duration);
+        playhead.style.marginLeft = playPercent + "px";
+        if (music.currentTime == duration) {
+            pButton.className = "";
+            pButton.className = "play";
+        }
+    }
+
+    //Play and Pause
+    function play() {
+        music.play();
+        $("#pButton").css({ 'display': 'none' });
+
+    }
+    function pause() {
+        music.pause();
+        $("#pButton").css({ 'display': 'block' });
+        music.currentTime = 0;
+    }
+
+    music.addEventListener("canplaythrough", function () {
+        duration = music.duration;
+    }, false);
+
+    function getPosition(el) {
+        return el.getBoundingClientRect().left;
+    }
+
+    document.getElementById('answer').onkeyup = function () {
+        try {
+            var K = this.value.toString();
+            var X = $('#text').val();
+            var Y = "";
+            var j = 0;
+            for (var i = 0; i < K.length; i++) {
+
+                if (K[i] == X[i]) {
+                    Y = Y + K[i];
+                    document.getElementById('answer').value = Y;
+                    j++;
+                }
+                else {
+                    document.getElementById('answer').value = Y;
+                }
+                if (K[i] == " ") {
+                    document.getElementById('litsen').innerHTML = Y;
+                }
+                if (K == X) {
+                    document.getElementById('litsen').innerHTML = Y;
+                }
+
+            }
+
+
+
+
+        }
+        catch (err) {
+            document.getElementById("demo").innerHTML =
+                err.name + "<br>" + err.message;
+        }
+    }
+</script>

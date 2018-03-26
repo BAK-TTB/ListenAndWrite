@@ -1,0 +1,29 @@
+﻿@using ListenAndWrite.Models;
+@*định nghĩa kiểu dữ liệu cho biến Model*@
+@model List<Audio>
+
+@{
+    ViewBag.Title = "Levels";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<link href="~/Content/NguoiDungCssLayout/pageLevels.css" rel="stylesheet" />
+<div class="panel panel-default">
+    <div class="panel-heading" style="background-color:#337AB7; color:white; text-align: center;">
+        <h4>LEVELS</h4>
+    </div>
+    <div class="row-item row">
+        <div class="col-md-12" style="min-height: 650px;">
+            <br />
+            <div class="levels">
+                @{
+                /**/
+
+                    foreach (var item in Model)
+                    {
+                        <a href="@Url.Action("XemChiTiet", "Audio", new { @id=item.id})">@item.id</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
