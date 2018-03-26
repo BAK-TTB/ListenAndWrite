@@ -1,3 +1,3 @@
 # ListenAndWrite
-#CSDL: sqlserver.
-#Name Database: QuanLyAudio
+CSDL: sqlserver.
+Name Database: QuanLyAudio.
