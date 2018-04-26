@@ -47,10 +47,10 @@
                                                 <div id="timeline">
                                                     <div id="playhead"></div>
                                                 </div>
+                                                
                                                 <div id="slimprogress" style="width:525px; height:3px;"></div>
-
-                                                <textarea class="input" id="text1" style="display: none;">The red brown fox jumped over the rolling log</textarea>
-                                                <textarea class="input" cols="38" rows="3" id="audioScriptTmode">The red brown fox jumped over the rolling log</textarea>
+                                                <textarea class="input" id="textareaBefore" style="display: none;">This is not a test. This is line 2.</textarea>
+                                                <textarea class="input" cols="38" rows="3" id="textareaAfter">This is totally a test. This is line 2.</textarea>
                                                 <div id="audioplayer">
                                                     <div id="pButton" class="play"></div>
                                                 </div>
@@ -59,7 +59,7 @@
                                             <center id="finish">
                                                 <span class="button xLarge icon">
                                                     <span class="check"></span>
-                                                    <button type="button" class="run">Check</button>
+                                                    <button type="button" id="buttonCompare" onclick="buttonCompareClicked();">Check</button>
                                                 </span>
                                                 <br />
                                                 <span id="alertmsg"></span>
@@ -71,7 +71,7 @@
                                         <td></td>
                                         <td>
                                             <br />
-                                            <div id="answer" class="output"></div>
+                                            <div id="textareaDifferences" style="border:1px solid;height:200px"></div>
                                         </td>
                                     </tr>
                                 </table>
@@ -94,7 +94,7 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/NguoiDungJs/diff.js"></script>
+<script src="~/Scripts/NguoiDungJs/mydiff.js"></script>
 <script>
 var music = document.getElementById('music');
 var duration = music.duration;
@@ -140,11 +140,4 @@ music.addEventListener("canplaythrough", function() {
 function getPosition(el) {
     return el.getBoundingClientRect().left;
 }
-
-var run = document.querySelector(".run"),
-    input = document.querySelectorAll(".input"),
-    output = document.querySelector(".output");
-run.addEventListener("click", function() {
-    output.innerHTML = diffString(input[1].value, input[0].value);
-});
 </script>
