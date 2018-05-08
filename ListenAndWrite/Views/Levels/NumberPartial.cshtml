@@ -1,0 +1,26 @@
+﻿@using ListenAndWrite.Models;
+@*định nghĩa kiểu dữ liệu cho biến Model*@
+@model List<chude>
+
+<style>
+    .levels>a.active {
+        background-color: yellow;
+    }
+</style>
+<div class="levels">
+    
+    @{
+        for (var i = 0; i < Model.Count - 1; i++)
+        {
+            for (var j = i + 1; j < Model.Count; j++)
+            {
+                if (Model[j].levels == Model[i].levels)
+                {
+                    <a href="@Url.Action("levels", "Levels", new { @level= Model[i].levels})">@Model[i].levels</a>
+                    break;
+                }
+            }
+
+        }
+    }
+</div>

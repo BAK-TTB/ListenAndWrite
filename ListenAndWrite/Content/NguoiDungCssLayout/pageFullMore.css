@@ -7,6 +7,7 @@
     border: 5px solid #8D8989;
     border-top: none;
     padding: 5px;
+    color: blue;
 }
 
 #pButton {
@@ -34,6 +35,7 @@ textarea#answer {
     background-position: bottom right;
     background-repeat: no-repeat;
     overflow: hidden;
+    color: #808080;
     /* for I.E. */
 }
 

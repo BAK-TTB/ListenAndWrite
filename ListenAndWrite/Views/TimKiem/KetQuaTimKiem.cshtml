@@ -1,0 +1,41 @@
+﻿@using ListenAndWrite.Models;
+@using PagedList.Mvc;
+@*định nghĩa kiểu dữ liệu cho biến Model*@
+@model PagedList.IPagedList<audio>
+
+@{
+    ViewBag.Title = "KetQuaTimKiem";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+} 
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background-color:#337AB7; color:white; text-align: center; font-size: 20px;">
+        <p><b>Kết Quả Tìm Kiếm</b></p>
+        <p><b>@ViewBag.ThongBao</b></p>
+    </div>
+    <div class="row-item row">
+        <div class="col-md-12">
+            @{
+                /**/
+
+                foreach (var item in Model)
+                {
+                    <div class="item">
+                        <h4 class="title"><a href="@Url.Action("xemchitiet", "audio", new { @id=item.idChuDe})">♫ @item.chudes.chuDe ♫</a></h4>
+                        <p>@item.name</p>
+                        <p>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-play-circle"></span> www.listen-and-write.com,
+                            <font color="#2e0cfa">level = @item.chudes.levels</font>, about one day ago
+                        </p>
+                    </div>
+                    <div class="break"></div>
+                }
+            }
+        </div>
+    </div>
+    @*Tạo link liên kết các trang *@
+    <div style="text-align: center;">
+        @Html.PagedListPager(Model, page => Url.Action("KetQuaTimKiem", new { page = page, @sTuKhoa = ViewBag.TuKhoa }))
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+    </div>
+</div>

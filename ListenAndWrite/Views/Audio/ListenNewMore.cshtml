@@ -1,5 +1,6 @@
 ﻿@using ListenAndWrite.Models;
-@model Audio
+@using PagedList.Mvc;
+@model PagedList.IPagedList<audio>
 @{
     ViewBag.Title = "Listen New More";
     Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
@@ -13,10 +14,10 @@
                     <br />
                     <div style="float:left; width:110px;height:110px; border: 6px solid #DDDDDD; background:RGB(120,188,100);">
                         <br />
-                        <center><a href="/audio/level/10" style="color: #000000;background-color: RGB(120,188,100);font-weight:bold;font-size:1.6em;">Level<br />@Model.id</a></center>
+                        <center><a href="/audio/level/10" style="color: #000000;background-color: RGB(120,188,100);font-weight:bold;font-size:1.6em;">Level<br />@Model[0].chudes.levels</a></center>
                     </div>
                     <h1 style="margin-left:65px;">
-                        &nbsp; @Model.name
+                        &nbsp; @Model[0].chudes.chuDe
                     </h1>
                     <br />
                     <br />
@@ -26,55 +27,73 @@
                         <br>
                         <div id="sentence_list">
                             <div align="center">
-                                <a href="#">&laquo;</a>
-                                <select id="sentences_no" class="select-style">
-                                    <option value="0">1...</option>
-                                    <option value="1">2...</option>
-                                    <option value="2">3...</option>
-                                </select>
-                                <a href="#">&raquo;</a>
+                                <style>
+                                    .pagination > li > a, .pagination > li > span {
+                                        border: none;
+                                        padding: 0 12px 0 12px;
+                                    }
+
+                                    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+                                        background-color: #808080;
+                                        border-color: #428bca;
+                                    }
+
+                                    .pagination > li:last-child > a, .pagination > li:last-child > span {
+                                        border-radius: 4px;
+                                    }
+                                </style>
+                                <b style="color: blue; font-size: 20px;"> Track <span id="track">@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</span></b>
+                                @Html.PagedListPager(Model, track => Url.Action("ListenNewMore", new { id = Model[0].idChuDe, track = track }))
                             </div>
                             <br>
                             <div>
-                                <table border="0">
-                                    <tr>
-                                        <td width="20" align=right></td>
-                                        <td>
-                                            <audio id="music" preload="true" loop>
-                                                <source src="http://www.listen-and-write.com/myaudio/b54be944f47a4dd26000603aaf49ecc8/1B_Grammar_Bank_Discourse_markers_Reason.mp3" type="audio/mpeg">
-                                            </audio>
-                                            <div style="overflow: hidden;position: relative;height:190px;">
-                                                <div id="timeline">
-                                                    <div id="playhead"></div>
+                                @{ 
+                                    foreach (var item in Model)
+                                    {
+                                    <table border="0">
+                                        <tr>
+                                            <td width="20" align=right></td>
+                                            <td>
+                                                <audio id="music" preload="true" loop>
+                                                    <source src="@Url.Content("~/fileAudio/"+@item.url)" type="audio/mpeg">
+                                                </audio>
+                                                <div style="overflow: hidden;position: relative;height:190px;">
+                                                    <div id="timeline">
+                                                        <div id="playhead"></div>
+                                                    </div>
+
+                                                    <div id="slimprogress" style="width:525px; height:3px;"></div>
+                                                    <textarea class="input" id="text1" style="display: none;">@item.name</textarea>
+                                                    <textarea class="input" cols="38" rows="3" id="audioScriptTmode">Gõ cái mày nghe thấy vào đây đi</textarea>
+                                                    <div id="audioplayer">
+                                                        <div id="pButton" class="play"></div>
+                                                    </div>
                                                 </div>
-                                                
-                                                <div id="slimprogress" style="width:525px; height:3px;"></div>
-                                                <textarea class="input" id="textareaBefore" style="display: none;">This is not a test. This is line 2.</textarea>
-                                                <textarea class="input" cols="38" rows="3" id="textareaAfter">This is totally a test. This is line 2.</textarea>
-                                                <div id="audioplayer">
-                                                    <div id="pButton" class="play"></div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <center id="finish">
-                                                <span class="button xLarge icon">
-                                                    <span class="check"></span>
-                                                    <button type="button" id="buttonCompare" onclick="buttonCompareClicked();">Check</button>
-                                                </span>
+                                                <br>
+                                                <center id="finish">
+                                                    <span class="button xLarge icon">
+                                                        <span class="check"></span>
+                                                        <button type="button" class="run">Check</button>
+                                                    </span>
+                                                    <br />
+                                                    <span id="alertmsg"></span>
+                                                </center>
+                                                <br>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
                                                 <br />
-                                                <span id="alertmsg"></span>
-                                            </center>
-                                            <br>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <br />
-                                            <div id="textareaDifferences" style="border:1px solid;height:200px"></div>
-                                        </td>
-                                    </tr>
-                                </table>
+                                                <div id="answer" class="output">
+                                                    
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    }
+                                }
+                                
                             </div>
                         </div>
                     </div>
@@ -94,50 +113,72 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/NguoiDungJs/mydiff.js"></script>
+<script src="~/Scripts/NguoiDungJs/myDiff.js"></script>
 <script>
-var music = document.getElementById('music');
-var duration = music.duration;
-var pButton = document.getElementById('pButton');
-var playhead = document.getElementById('playhead');
-var timeline = document.getElementById('timeline');
+    var music = document.getElementById('music');
+    var duration = music.duration;
+    var pButton = document.getElementById('pButton');
+    var playhead = document.getElementById('playhead');
+    var timeline = document.getElementById('timeline');
 
-var timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
+    var timelineWidth = timeline.offsetWidth - playhead.offsetWidth;
 
-pButton.addEventListener("click", play);
+    pButton.addEventListener("click", play);
 
-music.addEventListener("timeupdate", timeUpdate, false);
+    music.addEventListener("timeupdate", timeUpdate, false);
 
-timeline.addEventListener("click", function(event) {
-    moveplayhead(event);
-    music.currentTime = duration * clickPercent(event);
-}, false);
+    timeline.addEventListener("click", function (event) {
+        moveplayhead(event);
+        music.currentTime = duration * clickPercent(event);
+    }, false);
 
-function clickPercent(event) {
-    return (event.clientX - getPosition(timeline)) / timelineWidth;
-}
-
-function timeUpdate() {
-    var playPercent = timelineWidth * (music.currentTime / duration);
-    playhead.style.marginLeft = playPercent + "px";
-    if (music.currentTime == duration) {
-        pButton.className = "";
-        pButton.className = "play";
+    function clickPercent(event) {
+        return (event.clientX - getPosition(timeline)) / timelineWidth;
     }
-}
 
-//Play and Pause
-function play() {
-    // start music
-    music.play();
-    $( "#pButton" ).css({'display': 'none'});
-}
+    function timeUpdate() {
+        var playPercent = timelineWidth * (music.currentTime / duration);
+        playhead.style.marginLeft = playPercent + "px";
+        if (music.currentTime == duration) {
+            pButton.className = "";
+            pButton.className = "play";
+        }
+    }
 
-music.addEventListener("canplaythrough", function() {
-    duration = music.duration;
-}, false);
+    //Play and Pause
+    function play() {
+        // start music
+        music.play();
+        $("#pButton").css({ 'display': 'none' });
+    }
 
-function getPosition(el) {
-    return el.getBoundingClientRect().left;
-}
+    music.addEventListener("canplaythrough", function () {
+        duration = music.duration;
+    }, false);
+
+    function getPosition(el) {
+        return el.getBoundingClientRect().left;
+    }
+
+    var tmp = document.getElementById('track').innerText;
+
+    if (Number(tmp) < @Model.PageCount){
+        var track = Number(tmp) + 1;
+    } else {
+        var track = @Model.PageCount;
+        alert("Chủ đề cuối!")
+    }
+       
+    //Diff
+    var run = document.querySelector(".run"),
+        input = document.querySelectorAll(".input"),
+        output = document.querySelector(".output");
+    run.addEventListener("click", function () {
+        output.innerHTML = diffString(input[1].value, input[0].value) + "<center style='margin: 10px 0 10px 0;'> <span class='button xLarge icon'><button type='button' onclick='listenAgain()' style='padding: 0 3px 0 3px; font-size: 18px;'> <span class='glyphicon glyphicon-refresh' style='font-size: 14px; color: #808080;'></span> Listen Again</button></span>&nbsp; &nbsp;<span class='button xLarge icon'><a href='?track="+track+"' style='background: #eeeeee; padding: 7px; border: 1px solid #7c7c7c; font-size: 18px;'>Next Track <span class='glyphicon glyphicon-plus' style='font-size: 14px; color: #009900;'></span></a></span></center>";
+    });
+
+    function listenAgain() {
+        music.currentTime = 0;
+        music.play();
+    }
 </script>

@@ -25,6 +25,8 @@ namespace ListenAndWrite.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Audio> Audios { get; set; }
+        public virtual DbSet<audio> audios { get; set; }
+        public virtual DbSet<chude> chudes { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

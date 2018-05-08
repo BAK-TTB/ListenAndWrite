@@ -1,6 +1,7 @@
 ﻿@using ListenAndWrite.Models;
+@using PagedList.Mvc;
 @*định nghĩa kiểu dữ liệu cho biến Model*@
-@model List<Audio>
+@model PagedList.IPagedList<chude>
 
 <div class="panel panel-default">
     <div class="panel-heading" style="background-color:#337AB7; color:white; text-align: center; font-size: 20px;">
@@ -15,10 +16,10 @@
                 foreach (var item in Model)
                 {
                     <div class="item">
-                        <h4 class="title"><a href="@Url.Action("XemChiTiet", "Audio", new { @id=item.id})">♫ @item.name ♫</a></h4>
+                        <h4 class="title"><a href="@Url.Action("xemchitiet", "audio", new { @id=item.idChuDe})">♫ @item.chuDe ♫</a></h4>
                         <p>
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-play-circle"></span> www.listen-and-write.com,
-                            <font color="#2E0CFA">level = @item.LevelAudio</font>, about one day ago
+                            <font color="#2e0cfa">level = @item.levels</font>, about one day ago
                         </p>
                     </div>
                     <div class="break"></div>
@@ -26,15 +27,9 @@
             }
         </div>
     </div>
+    @*Tạo link liên kết các trang *@
     <div style="text-align: center;">
-        <ul class="pagination">
-            <li><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
     </div>
 </div>

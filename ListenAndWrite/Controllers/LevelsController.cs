@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using ListenAndWrite.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace ListenAndWrite.Controllers
 {
@@ -12,9 +15,20 @@ namespace ListenAndWrite.Controllers
         // GET: Levels
         QuanLyAudioEntities db = new QuanLyAudioEntities();
 
-        public ActionResult Levels()
+        public ViewResult Levels(int level = 1, int? page = 1)
         {
-            return View(db.Audios.ToList());
+            //Tao ra một biến là số chủ đề trên trang
+            int pageSize = 1;
+            //Tao bien so trang
+            int pageNumber = (page ?? 1);
+            var listLevels = db.chudes.ToList().Where(cd => cd.levels == level).OrderBy(n => n.levels).ToPagedList(pageNumber, pageSize);
+            return View(listLevels);
         }
+
+        public PartialViewResult NumberPartial()
+        {
+            return PartialView(db.chudes.ToList());
+        }
+
     }
 }

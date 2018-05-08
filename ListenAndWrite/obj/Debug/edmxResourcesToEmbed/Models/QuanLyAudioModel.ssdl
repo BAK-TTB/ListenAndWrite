@@ -1,16 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QuanLyAudioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Audio">
+  <EntityType Name="audio">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="idAudio" />
     </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NameAudio" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Text" Type="ntext" Nullable="false" />
-    <Property Name="LevelAudio" Type="int" Nullable="false" />
-    <Property Name="name" Type="nvarchar(max)" />
+    <Property Name="idAudio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="url" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="text" Type="ntext" Nullable="false" />
+    <Property Name="idChuDe" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="chude">
+    <Key>
+      <PropertyRef Name="idChuDe" />
+    </Key>
+    <Property Name="idChuDe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="chuDe" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="levels" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_audio_chude">
+    <End Role="chude" Type="Self.chude" Multiplicity="1" />
+    <End Role="audio" Type="Self.audio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chude">
+        <PropertyRef Name="idChuDe" />
+      </Principal>
+      <Dependent Role="audio">
+        <PropertyRef Name="idChuDe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="QuanLyAudioModelStoreContainer">
-    <EntitySet Name="Audio" EntityType="Self.Audio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="audio" EntityType="Self.audio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="chude" EntityType="Self.chude" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_audio_chude" Association="Self.FK_audio_chude">
+      <End Role="chude" EntitySet="chude" />
+      <End Role="audio" EntitySet="audio" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

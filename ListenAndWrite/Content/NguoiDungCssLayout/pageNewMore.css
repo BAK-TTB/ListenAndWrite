@@ -1,4 +1,4 @@
-﻿div#textareaDifferences {
+﻿div#answer {
     display: block;
     font-size: 20px;
     color: blue;
@@ -13,7 +13,7 @@
     padding: 5px;
 }
 
-textarea#textareaAfter {
+textarea#audioScriptTmode {
     width: 500px;
     height: 150px;
     border: 7px solid #880000;
@@ -23,7 +23,8 @@ textarea#textareaAfter {
     font-size: 1.3em;
     font-weight: bold;
     background: #ffffff;
-    background-image: url("../../Images/scriptbg4.png"); background-position: bottom right;
+    background-image: url("../../Images/scriptbg4.png");
+    background-position: bottom right;
     background-repeat: no-repeat;
     overflow: hidden;
     /* for I.E. */

@@ -11,13 +11,18 @@ namespace ListenAndWrite.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Audio
+    using System.ComponentModel.DataAnnotations;
+    using System.Data.Entity;
+
+    public partial class audio
     {
-        public int id { get; set; }
-        public string NameAudio { get; set; }
-        public string Text { get; set; }
-        public int LevelAudio { get; set; }
+        [Key]
+        public int idAudio { get; set; }
         public string name { get; set; }
+        public string url { get; set; }
+        public string text { get; set; }
+        public int idChuDe { get; set; }
+    
+        public virtual chude chudes { get; set; }
     }
 }

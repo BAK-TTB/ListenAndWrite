@@ -1,6 +1,7 @@
 ﻿@using ListenAndWrite.Models;
+@using PagedList.Mvc;
 @*định nghĩa kiểu dữ liệu cho biến Model*@
-@model List<Audio>
+@model PagedList.IPagedList<chude>
 
 @{
     ViewBag.Title = "Levels";
@@ -12,17 +13,31 @@
         <h4>LEVELS</h4>
     </div>
     <div class="row-item row">
-        <div class="col-md-12" style="min-height: 650px;">
+        <div class="col-md-12" style="margin-bottom: 20px;">
             <br />
-            <div class="levels">
-                @{
+            @Html.Action("NumBerPartial", "Levels")
+        </div>
+        
+        <div class="col-md-12" style="min-height: 650px;">
+            @{
                 /**/
 
-                    foreach (var item in Model)
-                    {
-                        <a href="@Url.Action("XemChiTiet", "Audio", new { @id=item.id})">@item.id</a>
-                    }
+                foreach (var item in Model)
+                {
+                    <div class="item">
+                        <h4 class="title"><a href="@Url.Action("xemchitiet", "audio", new { @id=item.idChuDe})">♫ @item.chuDe ♫</a></h4>
+                        <p>
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-play-circle"></span> www.listen-and-write.com,
+                            <font color="#2e0cfa">level = @item.levels</font>, about one day ago
+                        </p>
+                    </div>
+                    <div class="break"></div>
                 }
+            }
+
+            <div style="text-align: center;">
+                @Html.PagedListPager(Model, page => Url.Action("levels", new { level = Model[0].levels, page = page }))
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
             </div>
         </div>
     </div>

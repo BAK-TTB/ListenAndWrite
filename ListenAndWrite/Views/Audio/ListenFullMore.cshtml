@@ -1,5 +1,6 @@
 ﻿@using ListenAndWrite.Models;
-@model Audio
+@using PagedList.Mvc;
+@model PagedList.IPagedList<audio>
 @{
     ViewBag.Title = "Listen Full More";
     Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
@@ -13,10 +14,10 @@
                     <br />
                     <div style="float:left; width:110px;height:110px; border: 6px solid #DDDDDD; background:RGB(120,188,100);">
                         <br />
-                        <center><a href="#" style="color: #000000;background-color: RGB(120,188,100);font-weight:bold;font-size:1.6em;">Level<br />@Model.id</a></center>
+                        <center><a href="#" style="color: #000000;background-color: RGB(120,188,100);font-weight:bold;font-size:1.6em;">Level <br />@Model[0].chudes.levels</a></center>
                     </div>
                     <h1 style="margin-left:65px;">
-                        &nbsp; @Model.name
+                        &nbsp; @Model[0].chudes.chuDe
                     </h1>
                     <br />
                     <br />
@@ -26,47 +27,69 @@
                         <br>
                         <div id="sentence_list">
                             <div align="center">
-                                <input type=button value="&laquo;" class="btn2" />
-                                <select id="sentences_no" class="select-style">
-                                    <option value="0">1...</option>
-                                    <option value="1">2...</option>
-                                    <option value="2">3...</option>
+                                <style>
+                                    .pagination > li > a, .pagination > li > span {
+                                        border: none;
+                                        padding: 0 12px 0 12px;
+                                    }
+                                    .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+                                        background-color: #808080;
+                                        border-color: #428bca;
+                                    }
+                                    .pagination > li:last-child > a, .pagination > li:last-child > span {
+                                        border-radius: 4px;
+                                    }
+                                </style>
+                                <b style="color: blue; font-size: 20px;"> Track @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</b>
+                                @Html.PagedListPager(Model, track => Url.Action("ListenFullMore", new { id = Model[0].idChuDe, track = track }))
+                                @*<input type=button value="&laquo;" class="btn2" />
+                                <select id="idAudio" class="select-style">
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.idAudio">Track @item.idAudio</option>
+                                    }
                                 </select>
-                                <input type=button value="&raquo;" class="btn2" />
+                                <input type=button value="&raquo;" class="btn2" />*@
                             </div>
                             <br>
-                            <div>
-                                <table border="0">
-                                    <tr>
-                                        <td width="20" align=right></td>
-                                        <td>
-                                            <audio id="music" preload="true" loop>
-                                                <source src="http://www.listen-and-write.com/myaudio/b54be944f47a4dd26000603aaf49ecc8/1B_Grammar_Bank_Discourse_markers_Reason.mp3" type="audio/mpeg">
-                                            </audio>
-                                            <div style="overflow: hidden;position: relative;height:250px;">
-                                                <div id="timeline">
-                                                    <div id="playhead"></div>
+                            <div id="table">
+                                @{ 
+                                    foreach (var item in Model)
+                                    {
+                                    <table>
+                                        <tr>
+                                            <td width="20" align=right></td>
+                                            <td>
+                                                <audio id="music" preload="true" loop>
+                                                    @* src="@Url.Content("~/Audio/"+ @item.url)" *@
+                                                    <source src="@Url.Content("~/fileAudio/"+@item.url)" type="audio/mpeg">
+                                                </audio>
+                                                <div style="overflow: hidden;position: relative;height:250px;">
+                                                    <div id="timeline">
+                                                        <div id="playhead"></div>
+                                                    </div>
+                                                    <div id="slimprogress" style="width:525px; height:3px;"></div>
+                                                    <div id="litsen" style="color: blue; font-size: 20px; font-style: oblique; font-family: Comic Sans MS;"></div>
+                                                    <span class='button small icon'><button type='button' id="stop">Stop</button></span>
+                                                    <span class='button small icon'><span class='check'></span><button id="hint" type='button'>Hint</button></span>
+                                                    <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
+                                                    <div id="audioplayer">
+                                                        <div id="pButton" class="play"></div>
+                                                    </div>
                                                 </div>
-                                                <div id="slimprogress" style="width:525px; height:3px;"></div>
-                                                <div id="litsen" style="color: #f00; font-size: 20px;"></div>
-                                                <span class='button small icon'><button type='button' id="stop">Stop</button></span>
-                                                <span class='button small icon'><span class='check'></span><button id="hint" type='button'>Hint</button></span>
-                                                <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
-                                                <div id="audioplayer">
-                                                    <div id="pButton" class="play"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <input id="text" type="text" name="text" value="i have a apple" style="border: none;">
-                                            <br>
-                                            <textarea cols="38" rows="1" id="answer" onkeyup="check(1, 1)" style=""></textarea>
-                                        </td>
-                                    </tr>
-                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <input id="text" type="text" name="text" value="@item.text" style="border: none;">
+                                                <br>
+                                                <textarea cols="38" rows="1" id="answer" onkeyup="check(1, 1)" style="color: #808080"></textarea>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    }
+                                }
                             </div>
                         </div>
                     </div>
@@ -86,11 +109,12 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
-    var music = document.getElementById('music'); 
+    var music = document.getElementById('music');
     var duration = music.duration;
-    var pButton = document.getElementById('pButton'); 
-    var playhead = document.getElementById('playhead'); 
+    var pButton = document.getElementById('pButton');
+    var playhead = document.getElementById('playhead');
     var timeline = document.getElementById('timeline');
     var stop = document.getElementById('stop');
 
@@ -173,4 +197,14 @@
                 err.name + "<br>" + err.message;
         }
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#idAudio").change(function () {
+            var id = $("#idAudio").val();
+            $("#music").html("<div>lol</div>");
+            $("#text").html("<b>lol</b>")
+            alert(id);
+        })
+    });
 </script>

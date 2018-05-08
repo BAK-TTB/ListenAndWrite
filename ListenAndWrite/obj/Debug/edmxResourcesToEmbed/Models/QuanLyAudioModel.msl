@@ -1,14 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="QuanLyAudioModelStoreContainer" CdmEntityContainer="QuanLyAudioEntities">
-    <EntitySetMapping Name="Audios">
-      <EntityTypeMapping TypeName="QuanLyAudioModel.Audio">
-        <MappingFragment StoreEntitySet="Audio">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="NameAudio" ColumnName="NameAudio" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="LevelAudio" ColumnName="LevelAudio" />
+    <EntitySetMapping Name="audios">
+      <EntityTypeMapping TypeName="QuanLyAudioModel.audio">
+        <MappingFragment StoreEntitySet="audio">
+          <ScalarProperty Name="idAudio" ColumnName="idAudio" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="idChuDe" ColumnName="idChuDe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="chudes">
+      <EntityTypeMapping TypeName="QuanLyAudioModel.chude">
+        <MappingFragment StoreEntitySet="chude">
+          <ScalarProperty Name="idChuDe" ColumnName="idChuDe" />
+          <ScalarProperty Name="chuDe" ColumnName="chuDe" />
+          <ScalarProperty Name="levels" ColumnName="levels" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="QuanLyAudioModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

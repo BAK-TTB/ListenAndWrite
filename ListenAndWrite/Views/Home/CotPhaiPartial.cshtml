@@ -14,23 +14,27 @@
         <div class="space20"></div>
         <div id="contact" style="text-align: center;">
             <h4>
-                <a class="btn btn-default" href="#" role="button" style="width: 100%"><i class="glyphicon glyphicon-volume-up"></i><span> Submit a new Audio !</span></a>
+                <a class="btn btn-default" href="@Url.Action("", "QuanLyAudio")" role="button" style="width: 100%"><i class="glyphicon glyphicon-volume-up"></i><span> Quản lý Audio</span></a>
             </h4>
         </div>
         <div class="break"></div>
         <div class="space20"></div>
         <div>
-            <form>
-                <div class="row">
+            <div class="row">
+                @*Hộp thoại tìm kiếm*@
+                <div id="txtTimKiem">
+                    @using (Html.BeginForm("KetQuaTimKiem","TimKiem",FormMethod.Post))
+                    {
                     <div class="col-md-8">
-                        <input type="search" style="width: 133px; padding: 2px; border: 1px solid rgb(126, 157, 185);" id="mySearch" name="q" placeholder="Search...">
+                        @*@Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Nhập từ khóa ..." })*@
+                        <input id="txtTimKiem" class="TextBoxTimKiem" type="search" style="width: 133px; padding: 2px; border: 1px solid rgb(126, 157, 185);" name="txtTimKiem" placeholder="Search..." value="">
                     </div>
-                    <div class="col-md-4">
-                        <button>Search</button>
-                    </div>
-                    <!-- <input type="submit" name="sa" value="Search"> -->
+                        <div class="col-md-4">
+                        <button type="submit" style="padding: 2px; border: 1px solid rgb(126, 157, 185); margin-left: -3px;">Search</button>
+                        </div>
+                    }
                 </div>
-            </form>
+            </div>
         </div>
         <div class="break"></div>
         <div class="space20"></div>

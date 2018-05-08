@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ListenAndWrite.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace ListenAndWrite.Controllers
 {
@@ -17,10 +19,14 @@ namespace ListenAndWrite.Controllers
             return View();
         }
 
-        public PartialViewResult TrangChuPartial()
+        public PartialViewResult TrangChuPartial(int? page)
         {
-            var listAudio = db.Audios.ToList();
-            return PartialView(listAudio);
+            //Tao ra một biến là số chủ đề trên trang
+            int pageSize = 2;
+            //Tao bien so trang
+            int pageNumber = (page ?? 1);
+            var listChuDe = db.chudes.ToList().OrderBy(n => n.levels).ToPagedList(pageNumber, pageSize);
+            return PartialView(listChuDe);
         }
     }
 }
