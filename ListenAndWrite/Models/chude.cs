@@ -12,7 +12,6 @@ namespace ListenAndWrite.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Data.Entity;
 
     public partial class chude
     {
@@ -28,11 +27,5 @@ namespace ListenAndWrite.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<audio> audios { get; set; }
-
     }
-
-    //public class chuDeContext : DbContext
-    //{
-    //    public DbSet<chude> chudes { get; set; }
-    //}
 }

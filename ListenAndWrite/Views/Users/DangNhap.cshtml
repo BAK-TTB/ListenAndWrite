@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+
+<style>
+    form {
+        border: 3px solid #f1f1f1;
+    }
+
+    #login>input[type=email], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    #login>button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    #login>button:hover {
+        opacity: 0.8;
+    }
+
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+    }
+
+    img.avatar {
+        width: 40%;
+        border-radius: 50%;
+    }
+</style>
+<h2>Login Form</h2>
+<h1>@ViewBag.ThongBao</h1>
+@using (Html.BeginForm())
+{
+    <div class="imgcontainer">
+        <img src="~/Images/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container" id="login" style="padding: 16px;">
+        <label for="uname"><b>Username</b></label>
+        <input type="email" placeholder="Enter Username" name="txtTaiKhoan" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="txtMatKhau" required>
+
+        <button type="submit" id="btnSubmit" name="btnSubmit">Login</button>
+    </div>
+}
+
+

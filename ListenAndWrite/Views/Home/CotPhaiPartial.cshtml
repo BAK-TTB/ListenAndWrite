@@ -1,15 +1,23 @@
-﻿<div class="panel panel-default">
+﻿@using ListenAndWrite.Models;
+
+<div class="panel panel-default">
     <div class="panel-heading" style="background-color:#337AB7; color:white; text-align: center;">
         <h4 style="margin-top:0px; margin-bottom:0px;"><span class="glyphicon glyphicon-headphones"></span> L&W</h4>
     </div>
     <div class="panel-body">
-        <h4>
-            <a class="btn btn-default" href="#" role="button"
-               style="width: 100%"><i class="glyphicon glyphicon-user"></i><span> Log in</span></a>
-        </h4>
-        <h4>
-            <a class="btn btn-default" href="#" role="button" style="width: 100%"><i class="glyphicon glyphicon-pencil"></i><span> Sign up</span></a>
-        </h4>
+            @{
+                if (Session["TaiKhoan"] == null)
+                {
+                    <h4><a class="btn btn-default" href="/Users/DangNhap" role="button" style="width: 100%"><i class="glyphicon glyphicon-log-in"></i><span> Log in</span></a></h4>
+                    <h4><a class="btn btn-default" href="/Users/DangKy" role="button" style="width: 100%"><i class="glyphicon glyphicon-pencil"></i><span> Sign up</span></a></h4>
+                }
+                else
+                {
+                    var user = Session["TaiKhoan"] as user;
+                    <h4><p style="text-align: center;"><span class="glyphicon glyphicon-user"></span> @user.HoTen</p></h4>
+                    <h4><a class="btn btn-default" href="/Users/DangXuat" role="button" style="width: 100%"><i class="glyphicon glyphicon-log-out"></i><span> Log out</span></a></h4>
+                }
+            }
         <div class="break"></div>
         <div class="space20"></div>
         <div id="contact" style="text-align: center;">
@@ -23,14 +31,14 @@
             <div class="row">
                 @*Hộp thoại tìm kiếm*@
                 <div id="txtTimKiem">
-                    @using (Html.BeginForm("KetQuaTimKiem","TimKiem",FormMethod.Post))
+                    @using (Html.BeginForm("KetQuaTimKiem", "TimKiem", FormMethod.Post))
                     {
-                    <div class="col-md-8">
-                        @*@Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Nhập từ khóa ..." })*@
-                        <input id="txtTimKiem" class="TextBoxTimKiem" type="search" style="width: 133px; padding: 2px; border: 1px solid rgb(126, 157, 185);" name="txtTimKiem" placeholder="Search..." value="">
-                    </div>
-                        <div class="col-md-4">
-                        <button type="submit" style="padding: 2px; border: 1px solid rgb(126, 157, 185); margin-left: -3px;">Search</button>
+                        <div class="col-md-8" style="margin-top: 20px;">
+                            @*@Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Nhập từ khóa ..." })*@
+                            <input id="txtTimKiem" class="TextBoxTimKiem" type="search" style="width: 133px; padding: 2px; border: 1px solid rgb(126, 157, 185);" name="txtTimKiem" placeholder="Search..." value="">
+                        </div>
+                        <div class="col-md-4"  style="margin-top: 20px;">
+                            <button type="submit" style="padding: 2px; border: 1px solid rgb(126, 157, 185); margin-left: -1px;">Search</button>
                         </div>
                     }
                 </div>

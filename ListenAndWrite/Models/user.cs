@@ -13,15 +13,12 @@ namespace ListenAndWrite.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class audio
+    public partial class user
     {
         [Key]
-        public int idAudio { get; set; }
-        public string name { get; set; }
-        public string url { get; set; }
-        public string text { get; set; }
-        public int idChuDe { get; set; }
-    
-        public virtual chude chudes { get; set; }
+        public int idUser { get; set; }
+        public string HoTen { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

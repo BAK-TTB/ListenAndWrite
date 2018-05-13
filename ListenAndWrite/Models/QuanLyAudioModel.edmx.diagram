@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="QuanLyAudioModel.chude" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyAudioModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="QuanLyAudioModel.FK_audio_chude" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QuanLyAudioModel.user" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

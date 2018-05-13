@@ -156,6 +156,7 @@
     <Compile Include="Controllers\LevelsController.cs" />
     <Compile Include="Controllers\QuanLyAudioController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,6 +184,9 @@
       <DependentUpon>QuanLyAudioModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>QuanLyAudioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
       <DependentUpon>QuanLyAudioModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -342,7 +346,7 @@
     <Content Include="Content\NguoiDungCssLayout\style.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fileAudio\a.mp3" />
+    <Content Include="fileAudio\b81e79c8e99026215618246aec8ec12b.mp3" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -352,6 +356,7 @@
     <Content Include="Images\fullmode.gif" />
     <Content Include="Images\home_next.gif" />
     <Content Include="Images\icon_home.png" />
+    <Content Include="Images\img_avatar2.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_home.gif" />
     <Content Include="Images\particles.gif" />
@@ -475,6 +480,8 @@
     <Content Include="Views\QuanLyAudio\ChuDePartial.cshtml" />
     <Content Include="Views\QuanLyAudio\ChinhSuaChuDe.cshtml" />
     <Content Include="Views\QuanLyAudio\XoaChuDe.cshtml" />
+    <Content Include="Views\Users\DangKy.cshtml" />
+    <Content Include="Views\Users\DangNhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

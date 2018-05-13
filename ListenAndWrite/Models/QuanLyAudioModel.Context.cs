@@ -28,5 +28,6 @@ namespace ListenAndWrite.Models
         public virtual DbSet<audio> audios { get; set; }
         public virtual DbSet<chude> chudes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<user> users { get; set; }
     }
 }

@@ -10,17 +10,13 @@
 <div class="levels">
     
     @{
-        for (var i = 0; i < Model.Count - 1; i++)
+        <a href="@Url.Action("levels", "Levels", new { @level= Model[0].levels})">@Model[0].levels</a>
+        for (var i = 1; i < Model.Count; i++)
         {
-            for (var j = i + 1; j < Model.Count; j++)
+            if (Model[i].levels != Model[i-1].levels)
             {
-                if (Model[j].levels == Model[i].levels)
-                {
-                    <a href="@Url.Action("levels", "Levels", new { @level= Model[i].levels})">@Model[i].levels</a>
-                    break;
-                }
+                <a href="@Url.Action("levels", "Levels", new { @level= Model[i].levels})">@Model[i].levels</a>
             }
-
         }
     }
 </div>

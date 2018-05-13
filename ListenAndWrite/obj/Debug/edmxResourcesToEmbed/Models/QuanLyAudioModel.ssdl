@@ -28,6 +28,15 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <Association Name="FK_audio_chude">
     <End Role="chude" Type="Self.chude" Multiplicity="1" />
     <End Role="audio" Type="Self.audio" Multiplicity="*" />
@@ -44,6 +53,7 @@
     <EntitySet Name="audio" EntityType="Self.audio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="chude" EntityType="Self.chude" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_audio_chude" Association="Self.FK_audio_chude">
       <End Role="chude" EntitySet="chude" />
       <End Role="audio" EntitySet="audio" />
