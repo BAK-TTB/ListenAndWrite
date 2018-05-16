@@ -435,6 +435,7 @@
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -482,6 +483,7 @@
     <Content Include="Views\QuanLyAudio\XoaChuDe.cshtml" />
     <Content Include="Views\Users\DangKy.cshtml" />
     <Content Include="Views\Users\DangNhap.cshtml" />
+    <Content Include="Views\Audio\CharPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

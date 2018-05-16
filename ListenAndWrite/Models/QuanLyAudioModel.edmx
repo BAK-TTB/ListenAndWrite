@@ -14,6 +14,8 @@
           <Property Name="url" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="text" Type="ntext" Nullable="false" />
           <Property Name="idChuDe" Type="int" Nullable="false" />
+          <Property Name="checks" Type="tinyint" Nullable="false" />
+          <Property Name="diem" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="chude">
           <Key>
@@ -78,6 +80,8 @@
           <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="idChuDe" Type="Int32" Nullable="false" />
           <NavigationProperty Name="chudes" Relationship="Self.FK_audio_chude" FromRole="audio" ToRole="chude" />
+          <Property Name="checks" Type="Byte" Nullable="false" />
+          <Property Name="diem" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="chude">
           <Key>
@@ -138,6 +142,8 @@
           <EntitySetMapping Name="audios">
             <EntityTypeMapping TypeName="QuanLyAudioModel.audio">
               <MappingFragment StoreEntitySet="audio">
+                <ScalarProperty Name="diem" ColumnName="diem" />
+                <ScalarProperty Name="checks" ColumnName="checks" />
                 <ScalarProperty Name="idAudio" ColumnName="idAudio" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="url" ColumnName="url" />

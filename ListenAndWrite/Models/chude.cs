@@ -11,8 +11,7 @@ namespace ListenAndWrite.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class chude
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +19,7 @@ namespace ListenAndWrite.Models
         {
             this.audios = new HashSet<audio>();
         }
-        [Key]
+    
         public int idChuDe { get; set; }
         public string chuDe { get; set; }
         public int levels { get; set; }

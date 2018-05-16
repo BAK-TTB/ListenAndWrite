@@ -32,10 +32,12 @@
                                         border: none;
                                         padding: 0 12px 0 12px;
                                     }
+
                                     .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
                                         background-color: #808080;
                                         border-color: #428bca;
                                     }
+
                                     .pagination > li:last-child > a, .pagination > li:last-child > span {
                                         border-radius: 4px;
                                     }
@@ -43,51 +45,55 @@
                                 <b style="color: blue; font-size: 20px;"> Track @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)</b>
                                 @Html.PagedListPager(Model, track => Url.Action("ListenFullMore", new { id = Model[0].idChuDe, track = track }))
                                 @*<input type=button value="&laquo;" class="btn2" />
-                                <select id="idAudio" class="select-style">
-                                    @foreach (var item in Model)
-                                    {
-                                        <option value="@item.idAudio">Track @item.idAudio</option>
-                                    }
-                                </select>
-                                <input type=button value="&raquo;" class="btn2" />*@
+                                    <select id="idAudio" class="select-style">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.idAudio">Track @item.idAudio</option>
+                                        }
+                                    </select>
+                                    <input type=button value="&raquo;" class="btn2" />*@
                             </div>
                             <br>
                             <div id="table">
-                                @{ 
+                                @{
                                     foreach (var item in Model)
                                     {
-                                    <table>
-                                        <tr>
-                                            <td width="20" align=right></td>
-                                            <td>
-                                                <audio id="music" preload="true" loop>
-                                                    @* src="@Url.Content("~/Audio/"+ @item.url)" *@
-                                                    <source src="@Url.Content("~/fileAudio/"+@item.url)" type="audio/mpeg">
-                                                </audio>
-                                                <div style="overflow: hidden;position: relative;height:250px;">
-                                                    <div id="timeline">
-                                                        <div id="playhead"></div>
+                                        <table>
+                                            <tr>
+                                                <td width="20" align=right></td>
+                                                <td>
+                                                    <audio id="music" preload="true" loop>
+                                                        @* src="@Url.Content("~/Audio/"+ @item.url)" *@
+                                                        <source src="@Url.Content("~/fileAudio/"+@item.url)" type="audio/mpeg">
+                                                    </audio>
+                                                    <div style="overflow: hidden;position: relative;height:250px;">
+                                                        <div id="timeline">
+                                                            <div id="playhead"></div>
+                                                        </div>
+                                                        <div id="slimprogress" style="width:525px; height:3px;"></div>
+                                                        <div id="litsen" style="color: blue; font-size: 20px; font-style: oblique; font-family: Comic Sans MS;"></div>
+                                                        <span class='button small icon'><button type='button' id="stop">Stop</button></span>
+                                                        <span class='button small icon'><span class='check'></span><button id="hint" type='button'>Hint</button></span>
+                                                        <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
+                                                        <div id="audioplayer">
+                                                            <div id="pButton" class="play" onclick="check(@item.idAudio)"></div>
+                                                        </div>
                                                     </div>
-                                                    <div id="slimprogress" style="width:525px; height:3px;"></div>
-                                                    <div id="litsen" style="color: blue; font-size: 20px; font-style: oblique; font-family: Comic Sans MS;"></div>
-                                                    <span class='button small icon'><button type='button' id="stop">Stop</button></span>
-                                                    <span class='button small icon'><span class='check'></span><button id="hint" type='button'>Hint</button></span>
-                                                    <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
-                                                    <div id="audioplayer">
-                                                        <div id="pButton" class="play"></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <input id="text" type="text" name="text" value="@item.text" style="border: none;">
-                                                <br>
-                                                <textarea cols="38" rows="1" id="answer" onkeyup="check(1, 1)" style="color: #808080"></textarea>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <input id="text" type="text" name="text" value="@item.text" style="border: none;">
+                                                    <br />
+                                                    <input id="checks" type="text" name="checks" value="@item.checks" style="border: none;" />
+                                                    <br />
+                                                    <input id="id" type="text" name="checks" value="@item.idAudio" style="border: none;" />
+                                                    <br />
+                                                    <textarea cols="38" rows="1" id="answer" onkeyup="check(1, 1)" style="color: #808080"></textarea>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     }
                                 }
                             </div>
@@ -109,6 +115,11 @@
         </div>
     </div>
 </div>
+
+<div>
+    @Html.Action("CharPartial", "Audio")
+</div>
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
     var music = document.getElementById('music');
@@ -147,7 +158,8 @@
     function play() {
         music.play();
         $("#pButton").css({ 'display': 'none' });
-
+        //var times = music.duration;
+        //alert(times);
     }
     function pause() {
         music.pause();
@@ -163,48 +175,118 @@
         return el.getBoundingClientRect().left;
     }
 
+    var text = $('#text').val();
+    X = text.match(/[\w\d]+/g) || [];
+    X = X.join(" ").split("");
+    var Z = text.match(/[\w\d\S]+/g) || [];
+    var dem = 0;
+    console.log(Z);
+    console.log(X);
+
+    var x = 0, y = 0;
+    var diem = 0, times = 0, time = 0;
+    var checks = $('#checks').val();
+    var id = $('#id').val();
+
     document.getElementById('answer').onkeyup = function () {
-        try {
-            var K = this.value.toString();
-            var X = $('#text').val();
-            var Y = "";
-            var j = 0;
-            for (var i = 0; i < K.length; i++) {
+        music.play();
+        $("#pButton").css({ 'display': 'none' });
+        times = music.duration;
+        time = setTimeout(x++, 1000);
+        var K = this.value.toString().split("");
 
-                if (K[i] == X[i]) {
-                    Y = Y + K[i];
-                    document.getElementById('answer').value = Y;
-                    j++;
+        var Y = '';
+        for (var i = 0; i < K.length; i++) {
+            if (K[i] == X[i]) {
+                Y += K[i];
+                if (X[i + 1] == " " || i == X.length - 1) {
+                    //document.getElementById('litsen').innerHTML = Y;
+                    $('#litsen').append(Z[dem] + " ");
+                    document.getElementById('answer').value = "";
+                    dem = dem + 1;
+                    X.splice(0, K.length + 1);
+                    console.log(X);
+                    if (X.length == 0) {
+                        $("#pButton").css({ 'display': 'block' });
+                        music.currentTime = 0;
+                        music.pause();
+                        times = music.duration;
+                        time = setTimeout(x++, 1000);
+                        console.log(time);
+                        console.log(times);
+                        diem = Math.round((times / time) * 1000) / 1000;
+                        console.log(diem);
+                        if (diem <= 1 && diem > 0.1) {
+                            y = 10;
+                        } else if (diem > 0.05 && diem <= 0.1) {
+                            y = 8;
+                        } else if (diem > 0.01 && diem <= 0.5) {
+                            y = 6;
+                        } else if (diem <= 0.01) {
+                            y = 4;
+                        }
+                        console.log(y);
+                        clearTimeout(time);
+                        var data = {
+                            diem: y,
+                            idAudio: id
+                        }
+                        if (checks == 0) {
+                            $.ajax({
+                                url: '/audio/Checks/',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: data,
+                                success: function (data) {
+                                    alert('OK');
+                                },
+                                error: function (err) {
+                                    console.log("Error: " + err);
+                                }
+                            })
+                        }
+                    }
+                    continue;
                 }
-                else {
-                    document.getElementById('answer').value = Y;
-                }
-                if (K[i] == " ") {
-                    document.getElementById('litsen').innerHTML = Y;
-                }
-                if (K == X) {
-                    document.getElementById('litsen').innerHTML = Y;
-                }
-
+            } else {
+                document.getElementById('answer').value = Y;
             }
-
-
-
-
-        }
-        catch (err) {
-            document.getElementById("demo").innerHTML =
-                err.name + "<br>" + err.message;
         }
     }
+
 </script>
 <script>
     $(document).ready(function () {
         $("#idAudio").change(function () {
             var id = $("#idAudio").val();
-            $("#music").html("<div>lol</div>");
-            $("#text").html("<b>lol</b>")
+            $("#music").html("<div>test</div>");
+            $("#text").html("<b>test</b>")
             alert(id);
         })
     });
 </script>
+@*<script>
+    var checks = $('#checks').val();
+    var diem = 8;
+
+    function check(id) {
+        var data = {
+            diem: diem,
+            idAudio: id
+        }
+        if (checks == 0) {
+            $.ajax({
+                url: '/audio/Checks/',
+                type: 'POST',
+                dataType: 'json',
+                data: data,
+                success: function (data) {
+                    alert('OK');
+                },
+                error: function (err) {
+                    console.log("Error: " + err.responseText);
+                }
+            })
+        }
+    }
+</script>*@

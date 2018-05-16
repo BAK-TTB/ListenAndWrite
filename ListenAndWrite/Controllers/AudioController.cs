@@ -27,6 +27,7 @@ namespace ListenAndWrite.Controllers
             return View(chude);
         }
 
+        [HttpGet]
         public ViewResult ListenFullMore(int id = 0, int? track = 1)
         {
             //kiểm tra chủ đề có tồn tại hay không
@@ -67,5 +68,25 @@ namespace ListenAndWrite.Controllers
             }
             return View(lstAudio);
         }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Checks(audio  a)
+        {
+            var audio = db.audios.SingleOrDefault(n => n.idAudio == a.idAudio);
+            audio.checks = 1;
+            audio.diem = a.diem;
+            db.Entry(audio).Property("checks").IsModified = true;
+            db.Entry(audio).Property("diem").IsModified = true;
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public PartialViewResult CharPartial()
+        {
+            var TB = db.audios.ToList();
+            return PartialView(TB);
+        }
+
     }
 }

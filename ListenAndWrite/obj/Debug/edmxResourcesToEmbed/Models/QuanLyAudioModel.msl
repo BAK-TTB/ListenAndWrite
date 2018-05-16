@@ -4,6 +4,8 @@
     <EntitySetMapping Name="audios">
       <EntityTypeMapping TypeName="QuanLyAudioModel.audio">
         <MappingFragment StoreEntitySet="audio">
+          <ScalarProperty Name="diem" ColumnName="diem" />
+          <ScalarProperty Name="checks" ColumnName="checks" />
           <ScalarProperty Name="idAudio" ColumnName="idAudio" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="url" ColumnName="url" />

@@ -11,16 +11,16 @@ namespace ListenAndWrite.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class audio
     {
-        [Key]
         public int idAudio { get; set; }
         public string name { get; set; }
         public string url { get; set; }
         public string text { get; set; }
         public int idChuDe { get; set; }
+        public byte checks { get; set; }
+        public int diem { get; set; }
     
         public virtual chude chudes { get; set; }
     }

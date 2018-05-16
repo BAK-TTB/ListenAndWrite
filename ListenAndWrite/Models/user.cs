@@ -11,11 +11,9 @@ namespace ListenAndWrite.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class user
     {
-        [Key]
         public int idUser { get; set; }
         public string HoTen { get; set; }
         public string Email { get; set; }

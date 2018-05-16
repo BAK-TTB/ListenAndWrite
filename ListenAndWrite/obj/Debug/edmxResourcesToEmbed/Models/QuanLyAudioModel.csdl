@@ -10,6 +10,8 @@
     <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="idChuDe" Type="Int32" Nullable="false" />
     <NavigationProperty Name="chudes" Relationship="Self.FK_audio_chude" FromRole="audio" ToRole="chude" />
+    <Property Name="checks" Type="Byte" Nullable="false" />
+    <Property Name="diem" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="chude">
     <Key>

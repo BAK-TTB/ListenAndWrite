@@ -9,6 +9,8 @@
     <Property Name="url" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="text" Type="ntext" Nullable="false" />
     <Property Name="idChuDe" Type="int" Nullable="false" />
+    <Property Name="checks" Type="tinyint" Nullable="false" />
+    <Property Name="diem" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="chude">
     <Key>

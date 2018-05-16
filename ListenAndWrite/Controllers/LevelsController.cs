@@ -27,7 +27,7 @@ namespace ListenAndWrite.Controllers
 
         public PartialViewResult NumberPartial()
         {
-            return PartialView(db.chudes.OrderBy(n => n.levels).ToList());
+            return PartialView(db.chudes.ToList());
         }
 
     }
