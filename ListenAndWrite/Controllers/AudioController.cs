@@ -84,7 +84,7 @@ namespace ListenAndWrite.Controllers
 
         public PartialViewResult CharPartial()
         {
-            var TB = db.audios.ToList();
+            var TB = db.audios.Include(cd => cd.chudes).Where(a => a.checks == 1).OrderBy(cd => cd.chudes.levels).ToList();
             return PartialView(TB);
         }
 

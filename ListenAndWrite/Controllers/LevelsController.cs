@@ -18,7 +18,7 @@ namespace ListenAndWrite.Controllers
         public ViewResult Levels(int level = 1, int? page = 1)
         {
             //Tao ra một biến là số chủ đề trên trang
-            int pageSize = 1;
+            int pageSize = 4;
             //Tao bien so trang
             int pageNumber = (page ?? 1);
             var listLevels = db.chudes.ToList().Where(cd => cd.levels == level).OrderBy(n => n.levels).ToPagedList(pageNumber, pageSize);

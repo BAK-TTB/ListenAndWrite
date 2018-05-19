@@ -2,7 +2,6 @@
 @using PagedList.Mvc;
 @*định nghĩa kiểu dữ liệu cho biến Model*@
 @model PagedList.IPagedList<chude>
-
 @{
     ViewBag.Title = "Levels";
     Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
@@ -34,7 +33,6 @@
                     <div class="break"></div>
                 }
             }
-
             <div style="text-align: center;">
                 @Html.PagedListPager(Model, page => Url.Action("levels", new { level = Model[0].levels, page = page }))
                 Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount

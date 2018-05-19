@@ -85,10 +85,8 @@
                                                 <td></td>
                                                 <td>
                                                     <input id="text" type="text" name="text" value="@item.text" style="border: none;">
-                                                    <br />
-                                                    <input id="checks" type="text" name="checks" value="@item.checks" style="border: none;" />
-                                                    <br />
-                                                    <input id="id" type="text" name="checks" value="@item.idAudio" style="border: none;" />
+                                                    <input id="checks" type="text" name="checks" value="@item.checks" style="border: none; display: none;" />
+                                                    <input id="id" type="text" name="checks" value="@item.idAudio" style="border: none; display: none;" />
                                                     <br />
                                                     <textarea cols="38" rows="1" id="answer" onkeyup="check(1, 1)" style="color: #808080"></textarea>
                                                 </td>
@@ -100,24 +98,13 @@
                         </div>
                     </div>
                     <hr />
-                    <p>
-                        <center>
-                            <br />
-                            <h4>
-                                Please login to save your score and to see your history. >>
-                                <a href="dangnhap.html">Login</a>
-                            </h4>
-                            <image src="~/Images/sample_scores2.png" alt="sample scores">
-                        </center>
-                    </p>
+                    <div>
+                        @Html.Action("CharPartial", "Audio")
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div>
-    @Html.Action("CharPartial", "Audio")
 </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
@@ -194,7 +181,6 @@
         times = music.duration;
         time = setTimeout(x++, 1000);
         var K = this.value.toString().split("");
-
         var Y = '';
         for (var i = 0; i < K.length; i++) {
             if (K[i] == X[i]) {
@@ -253,7 +239,6 @@
             }
         }
     }
-
 </script>
 <script>
     $(document).ready(function () {

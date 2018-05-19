@@ -1,50 +1,214 @@
 ﻿@using ListenAndWrite.Models;
 @model List<audio>
 
-
 @{
-    for (var i = 1; i < Model.Count; i++)
+    if (Session["TaiKhoan"] == null)
     {
-            <a href="@Url.Action("levels", "Levels", new { @level= Model[i].diem})">@Model[i].diem</a>
-       
+        <p>
+            <center>
+                <br />
+                <h4>
+                    Please login to save your score and to see your history. >>
+                    <a href="/Users/DangNhap">Login</a>
+                </h4>
+                <image src="~/Images/sample_scores2.png" alt="sample scores">
+            </center>
+        </p>
+    }
+    else
+    {
+        var user = Session["TaiKhoan"] as user;
+        <canvas id="line-chart" width="700" height="450"></canvas>
+        <script src="~/Scripts/Chart.min.js"></script>
+        <script>
+            var a = document.getElementsByClassName("diem");
+            console.log(a);
+            new Chart(document.getElementById("line-chart"), {
+                type: 'line',
+                data: {
+                    labels: [1, 2, 3,4,5,6,7,8,9,10],
+                    datasets: [{
+                        data: [
+
+                            @{
+                                var level1 = 0; var level2 = 0; var level3 = 0; var level4 = 0; var level5 = 0; var level6 = 0; var level7 = 0; var level8 = 0; var level9 = 0; var level10 = 0;
+                                var count1 = 0; var count2 = 0; var count3 = 0; var count4 = 0; var count5 = 0; var count6 = 0; var count7 = 0; var count8 = 0; var count9 = 0; var count10 = 0;
+
+                                  for (var i = 0; i < Model.Count; i++)
+                                    {
+                                    if (Model[i].chudes.levels == 1)
+                                    {
+                                        level1 += @Model[i].diem;
+                                        count1++;
+                                    }
+                                    if (Model[i].chudes.levels == 2)
+                                    {
+                                        level2 += @Model[i].diem;
+                                        count2++;
+                                    }
+                                    if (Model[i].chudes.levels == 3)
+                                    {
+                                        level3 += @Model[i].diem;
+                                        count3++;
+                                    }
+                                    if (Model[i].chudes.levels == 4)
+                                    {
+                                        level4 += @Model[i].diem;
+                                        count4++;
+                                    }
+                                    if (Model[i].chudes.levels == 5)
+                                    {
+                                        level5 += @Model[i].diem;
+                                        count5++;
+                                    }
+                                    if (Model[i].chudes.levels == 6)
+                                    {
+                                        level6 += @Model[i].diem;
+                                        count6++;
+                                    }
+                                    if (Model[i].chudes.levels == 7)
+                                    {
+                                        level7 += @Model[i].diem;
+                                        count7++;
+                                    }
+                                    if (Model[i].chudes.levels == 8)
+                                    {
+                                        level8 += @Model[i].diem;
+                                        count8++;
+                                    }
+                                    if (Model[i].chudes.levels == 9)
+                                    {
+                                        level9 += @Model[i].diem;
+                                        count9++;
+                                    }
+                                    if (Model[i].chudes.levels == 10)
+                                    {
+                                        level10 += @Model[i].diem;
+                                        count10++;
+                                    }
+                                }
+                                if (level1!=0)
+                                {
+                                     @Html.Raw(level1/count1);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                if (level2!=0)
+                                {
+                                     @Html.Raw(level2/count2);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                if (level3!=0)
+                                {
+                                     @Html.Raw(level3/count3);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                if (level4!=0)
+                                {
+                                     @Html.Raw(level4/count4);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                 if (level5!=0)
+                                {
+                                     @Html.Raw(level5/count5);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                 if (level6!=0)
+                                {
+                                     @Html.Raw(level6/count6);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                 if (level7!=0)
+                                {
+                                     @Html.Raw(level7/count7);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                 if (level8!=0)
+                                {
+                                     @Html.Raw(level8/count8);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                 if (level9!=0)
+                                {
+                                     @Html.Raw(level9/count9);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                                 if (level10!=0)
+                                {
+                                     @Html.Raw(level10/count10);
+                                     @Html.Raw(',')
+                                }
+                                else
+                                {
+                                    @Html.Raw(',')
+                                }
+                            }
+
+                        ],
+                        label: "Điểm",
+                        borderColor: "#c45850",
+                        fill: false
+                    }
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Tổng Quan Kết Quả: @user.HoTen'
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Level'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Điểm'
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
     }
 }
-<canvas id="line-chart" width="700" height="450"></canvas>
-<script src="~/Scripts/Chart.min.js"></script>
-<script>
-    new Chart(document.getElementById("line-chart"), {
-        type: 'line',
-        data: {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            datasets: [{
-                data: [0, 5, 6, 7, 7, 10, 5, 8, 5, 9],
-                label: "Điểm",
-                borderColor: "#c45850",
-                fill: false
-            }
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: 'Tổng Quan Kết Quả'
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Level'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Điểm'
-                    }
-                }]
-            }
-        }
-    });
-</script>

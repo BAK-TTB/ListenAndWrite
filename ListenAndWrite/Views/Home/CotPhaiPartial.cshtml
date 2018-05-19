@@ -22,7 +22,16 @@
         <div class="space20"></div>
         <div id="contact" style="text-align: center;">
             <h4>
-                <a class="btn btn-default" href="@Url.Action("", "QuanLyAudio")" role="button" style="width: 100%"><i class="glyphicon glyphicon-volume-up"></i><span> Quản lý Audio</span></a>
+                @{
+                    if (Session["TaiKhoan"] == null)
+                    {
+                        <i>Welcome to the Website!</i>
+                    }
+                    else
+                    {
+                        <a class="btn btn-default" href="@Url.Action("", "QuanLyAudio")" role="button" style="width: 100%"><i class="glyphicon glyphicon-volume-up"></i><span> Quản lý Audio</span></a>
+                    }
+                }
             </h4>
         </div>
         <div class="break"></div>

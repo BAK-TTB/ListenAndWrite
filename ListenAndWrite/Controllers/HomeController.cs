@@ -22,7 +22,7 @@ namespace ListenAndWrite.Controllers
         public PartialViewResult TrangChuPartial(int? page)
         {
             //Tao ra một biến là số chủ đề trên trang
-            int pageSize = 2;
+            int pageSize = 7;
             //Tao bien so trang
             int pageNumber = (page ?? 1);
             var listChuDe = db.chudes.ToList().OrderBy(n => n.levels).ToPagedList(pageNumber, pageSize);

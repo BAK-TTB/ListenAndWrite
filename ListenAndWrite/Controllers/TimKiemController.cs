@@ -22,7 +22,7 @@ namespace ListenAndWrite.Controllers
             List<audio> lstKQTK = db.audios.Where(n => n.name.Contains(sTuKhoa)).ToList();
 
             int pageNumber = (page ?? 1);
-            int pageSize = 4;
+            int pageSize = 7;
             if(lstKQTK.Count == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy kết quả nào!";
@@ -40,7 +40,7 @@ namespace ListenAndWrite.Controllers
             List<audio> lstKQTK = db.audios.Where(n => n.name.Contains(sTuKhoa)).ToList();
             //Phân trang
             int pageNumber = (page ?? 1);
-            int pageSize = 4;
+            int pageSize = 7;
             if (lstKQTK.Count == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy kết quả nào";
